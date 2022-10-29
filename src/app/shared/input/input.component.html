@@ -1,0 +1,25 @@
+<div class="mb-3">
+    <!-- ####### The Actual Input ####### -->
+    <label *ngIf="controlType !== 'checkbox'" class="form-label">{{label}}</label>
+    <input *ngIf="controlType === 'input'" class="form-control" [type]="type" [formControl]="control" />
+    <textarea *ngIf="controlType === 'textarea'" class="form-control" [formControl]="control"></textarea>
+
+    <div *ngIf="controlType === 'checkbox'" class="form-check">
+        <input [formControl]="control" class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate"/>
+        <label class="form-check-label" for="flexCheckIndeterminate">
+            {{label}}
+        </label>
+    </div>
+    <!-- ########################## -->
+
+    <!-- The Error handling for that input -->
+    <div *ngIf="showErrors()" class="alert alert-danger" role="alert">
+        <ng-container *ngIf="control.errors['required']">Value is required</ng-container>
+        <ng-container *ngIf="control.errors['email']">You must provide a valid Email.</ng-container>
+        <ng-container *ngIf="control.errors['minlength']">The minimum length is {{control.errors['minlength'].requiredLength}}</ng-container>
+        <ng-container *ngIf="control.errors['maxlength']">The maximum length is {{control.errors['maxLength'].requiredLength}}</ng-container>
+        <ng-container *ngIf="control.errors['pattern']">Please enter a valid format</ng-container>
+        <ng-container *ngIf="control.errors['nonUniqueEmail']">Email is taken</ng-container>
+        <ng-container *ngIf="control.errors['noConnection']">Can't tell is email is taken or not</ng-container>
+    </div>
+</div>
