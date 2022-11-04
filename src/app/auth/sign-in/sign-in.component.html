@@ -1,1 +1,12 @@
-<p>sign-in works!</p>
+<div class="container">
+    <h3>Sign In</h3>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()" >
+        <app-input label="Email" type="email" [control]="authForm.controls.email"></app-input>
+        <app-input label="Password" type="password" [control]="authForm.controls.password"></app-input>
+        <div *ngIf="authForm.errors" class="alert alert-danger" role="alert">
+            <ng-container *ngIf="authForm.errors['noConnection']">There is no internet connection. Please try again later!</ng-container>
+            <ng-container *ngIf="authForm.errors['credentials']">Invalid username or password</ng-container>
+        </div>
+        <button class="btn btn-primary">Submit</button>
+    </form>
+</div>
